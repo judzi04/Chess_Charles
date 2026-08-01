@@ -69,6 +69,8 @@ def main():
 
         if game_over_reason:
             gui.draw_game_over(game_over_reason)
+            time.sleep(5)
+            break
         clock.tick(30)
 
     gui.close()

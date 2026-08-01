@@ -128,6 +128,11 @@ class ChessBot:
             max_eval = -float('inf')
             for move in self.order_moves(board):
                 board.push(move)
+
+                if board.can_claim_threefold_repetition():
+                    board.pop()
+                    continue
+
                 eval_val = self.alpha_beta(board, depth-1, alpha, beta, False)
                 board.pop()
                 max_eval = max(max_eval, eval_val)
@@ -153,6 +158,11 @@ class ChessBot:
         best_value = -float('inf') if is_maximizing else float('inf')
         for move in self.order_moves(board):
             board.push(move)
+
+            if board.can_claim_threefold_repetition():
+                board.pop()
+                continue
+
             board_value = self.alpha_beta(board, self.depth-1, -float("inf"), float("inf"),not is_maximizing)
             board.pop()
 
