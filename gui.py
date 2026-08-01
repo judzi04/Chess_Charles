@@ -26,7 +26,7 @@ class ChessGUI:
     def __init__(self):
         pygame.init()
         self.screen = pygame.display.set_mode((BOARD_SIZE, BOARD_SIZE))
-        pygame.display.set_caption("Chess Board")
+        pygame.display.set_caption("Chess Charles")
         self.font = pygame.font.SysFont("segoeuisymbol", int(SQUARE_SIZE * 0.8))
 
     def draw_board(self):
