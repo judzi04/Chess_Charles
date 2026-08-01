@@ -55,6 +55,33 @@ class ChessGUI:
                 )
                 self.screen.blit(text_surface, text_rect)
 
+    def get_square_from_pos(self, pos):
+        x, y = pos
+        col = x // SQUARE_SIZE
+        row = y // SQUARE_SIZE
+
+        rank = 7-row
+        file = col
+
+        return chess.square(file, rank)
+
+    def draw_game_over(self, message:str):
+        overlay = pygame.Surface((BOARD_SIZE, BOARD_SIZE))
+        overlay.set_alpha(100)
+        overlay.fill((0,0,0))
+        self.screen.blit(overlay, (0, 0))
+
+        banner_font = pygame.font.SysFont("arial", 36, bold=True)
+        text_surface = banner_font.render(message, True, (255,255,255))
+
+        text_rect = text_surface.get_rect(center=(BOARD_SIZE//2, BOARD_SIZE//2))
+        padding_rect = text_rect.inflate(40, 20)
+        pygame.draw.rect(self.screen, (40,40,40), padding_rect, border_radius=10)
+        pygame.draw.rect(self.screen, (200,200,200), padding_rect, width=2, border_radius=10)
+
+        self.screen.blit(text_surface, text_rect)
+        pygame.display.flip()
+
     def update(self, board: chess.Board):
         self.draw_board()
         self.draw_pieces(board)
